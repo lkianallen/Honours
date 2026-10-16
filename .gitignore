@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# training artifacts — large/regenerable, don't commit
+training_run*/
+ablation_run/
+*.pt
+
+# real chain data — not sensitive, but no reason to version-control it
+sepolia_trace.json
+
+# never commit real API keys
+.env

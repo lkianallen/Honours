@@ -1,0 +1,6 @@
+torch
+optuna
+matplotlib
+numpy
+requests
+scipy
