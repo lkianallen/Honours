@@ -7,7 +7,6 @@ import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-# Put your own endpoint here. Don't commit a real key.
 ALCHEMY_URL = "https://eth-sepolia.g.alchemy.com/v2/"
 
 NUM_BLOCKS = 50          # how many recent blocks to pull
