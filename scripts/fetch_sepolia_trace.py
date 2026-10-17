@@ -1,14 +1,16 @@
 """Download the last N Sepolia blocks via Alchemy and save them where load_alchemy_blocks() expects. Needs network access and `pip install requests`; run it locally."""
 from pathlib import Path
 
+import os 
 import json
 import time
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-# Put your own endpoint here. Don't commit a real key.
-ALCHEMY_URL = "https://eth-sepolia.g.alchemy.com/v2/"
+# Set ALCHEMY_URL in your environment; never hard-code the key.
+# export ALCHEMY_URL="https://eth-sepolia.g.alchemy.com/v2/<your-key>"
+ALCHEMY_URL = os.environ.get("ALCHEMY_URL", "")
 
 NUM_BLOCKS = 50          # how many recent blocks to pull
 OUTPUT_PATH = REPO_ROOT / "sepolia_trace.json"

@@ -80,10 +80,7 @@ random.seed(42)
 shard_nodes = initialise_shardnodes(num_nodes_per_jurisdiction=3)
 simulator = Simulator(shard_nodes)
 transaction_list = generate_random_transactions(20)
-
-# The pygame visualiser (sim/visualiser.py) used to be driven from here. It
-# still reads the old node.cpu / node.disk attributes, so it needs porting to
-# Ucpu / Udisk before it will run against the current ShardNode.
+ 
 
 simulator.assign_transactions(transaction_list)  # writes land in block_registry
 

@@ -11,7 +11,6 @@ This README covers running the code. The method and results are in the thesis, a
 ```
 sim/       simulator, environment, networks, MAPPO trainer
 scripts/   the things you actually run (table below)
-results/   logs and plots cited in the thesis
 ```
 
 The main pieces in `sim/`:
@@ -36,7 +35,7 @@ pip install -r requirements.txt
 
 ## Getting data
 
-Real transactions come from Sepolia via a free [Alchemy](https://www.alchemy.com) key. Put your endpoint in `scripts/fetch_sepolia_trace.py` (don't commit a real key), then:
+Real transactions come from Sepolia via a free [Alchemy](https://www.alchemy.com) key. Set the ALCHEMY_URL environment variable to your endpoint”, then:
 
 ```
 python scripts/fetch_sepolia_trace.py
@@ -60,7 +59,7 @@ Run these from the repo root. Each script finds the root itself, and anything it
 | `optuna_tune.py` | sweeps the reward weights w1/w2 |
 | `main.py` | small simulator demo with no RL; the only place cross-shard reads get exercised |
 
-Checkpoints, `training_run*/` and `ablation_run/` are git-ignored; copy the logs and plots you cite into `results/`.
+Checkpoints, `training_run*/` and `ablation_run/` are git-ignored;
 
 ## Known limitations
 
@@ -68,4 +67,3 @@ Checkpoints, `training_run*/` and `ablation_run/` are git-ignored; copy the logs
 - **Latency is never exercised in training.** The Sepolia pipeline produces writes only, so the latency term of the reward is 0 in every training and evaluation run. The latency code (Eq. 5) works, but only `main.py` runs it.
 - **Agents can't see other nodes' load.** Each agent observes its own node and the incoming transaction. That's what makes it a Dec-POMDP, but it also means the policy can learn an average-case preference between nodes, not live load balancing.
 - **Hand-set parameters.** `mu_max`, `p` and `beta` were set by hand rather than calibrated against Hyperledger Fabric/Caliper, and `d_geo` (delay between jurisdictions) uses placeholder values.
-- **`sim/visualiser.py` is out of date.** It's an earlier pygame prototype that still reads the old `node.cpu` / `node.disk` attributes, so it won't run against the current `ShardNode`. It also needs `pygame`, which isn't in `requirements.txt`.

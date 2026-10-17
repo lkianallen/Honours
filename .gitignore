@@ -12,3 +12,4 @@ sepolia_trace.json
 
 # never commit real API keys
 .env
+.vscode/
